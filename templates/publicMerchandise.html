@@ -1,0 +1,107 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row top-menu">
+		<div class="col-md-10"></div>
+		<div class="col-md-2 text-right">
+			<a href="{{url_for('login')}}">Click Here to Log in </a>
+		</div>
+	</div>
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<h1>Merchandise</h1>
+		</div>
+	</div>
+
+	<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+
+	
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+		
+			
+			<div class="content">
+	
+				<!-- Adding gallery images. We use resized thumbnails here for better performance, but it’s not necessary -->
+		
+				<div id="galleria">
+					<a>
+						<img src= {{ url_for('static', filename='pic2.jpg') }} alt="" title="Weekender Bag">
+					</a>
+					<a>
+						<img src= {{ url_for('static', filename='pic3.jpg') }} alt="" title="Weekender and Messenger Bag">
+					</a>
+					<a>
+						<img src= {{ url_for('static', filename='pic4.jpg') }} alt="" title="Bag Collection">
+					</a>
+					<a>
+						<img src= {{ url_for('static', filename='pic7.jpg') }} alt="" title="Quilt">
+					</a>
+					<a>
+						<img src= {{ url_for('static', filename='pic5.jpg') }} alt="" title="Coin Purse">
+					</a>
+					<a>
+						<img src= {{ url_for('static', filename='pic12.jpg') }} alt="" title="Custom Bag">
+					</a>
+					<a>
+						<img src= {{ url_for('static', filename='pic10.jpg') }} alt="" title="Closer Look">
+					</a>
+					<a>
+					<img src= {{ url_for('static', filename='pic11.jpg') }} alt="" title="Baby Cover">
+					</a>
+					<a>
+						<img src= {{ url_for('static', filename='pillow1.jpg') }} alt="" title="Pillow">
+					</a>
+		
+				</div>
+			</div>
+		
+			<!-- load jQuery -->
+			<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script> -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+			<!-- load Galleria -->
+			<script src= {{ url_for('static', filename='galleria-1.5.7.min.js') }} ></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.3/themes/classic/galleria.classic.min.js"></script>
+			<script>
+				$(function() {
+					Galleria.run('#galleria');
+				});
+			</script>
+
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	
+	{% for merchandise in merchandises %}
+		<a href = "{{url_for('showCategories', merchandise_id = merchandise.id)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10 merchandise-list">
+						<h3>{{merchandise.name}}</h3>
+					</div>
+				<div class="col-md-1"></div>
+			</div>
+		</a>
+
+	{% endfor %}
+	
+{% endblock %}
